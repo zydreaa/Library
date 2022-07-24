@@ -4,18 +4,18 @@ import java.util.UUID;
 
 public class User {
 
-    private UUID id;
+    private int userId;
     private String username;
     private String password;
 
-    public User(UUID id, String username, String password) {
-        this.id = UUID.fromString(); //pagalvoti
+    public User(int userId, String username, String password) {
+        this.userId = userId;
         this.username = username;
         this.password = password;
     }
 
-    public void setId(UUID id) {
-        this.id = id;
+    public void setUserIdId(int userId) {
+        this.userId = userId;
     }
 
     public void setUsername(String username) {
@@ -26,8 +26,8 @@ public class User {
         this.password = password;
     }
 
-    public UUID getId() {
-        return id;
+    public int getUserId() {
+        return userId;
     }
 
     public String getUsername() {

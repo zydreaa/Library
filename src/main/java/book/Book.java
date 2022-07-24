@@ -4,23 +4,26 @@ import java.util.UUID;
 
 public class Book {
 
-    private UUID id;
+    private int id;
     public String bookAuthor;
     public String bookTitle;
-    public String bookGenre;
+    public Genre bookGenre;
 
-    public Book(UUID id, String bookAuthor, String bookTitle, String bookGenre) {
-        this.id = UUID.fromString(); //pagalvoti
+    public Status status;
+
+    public Book(int id, String bookAuthor, String bookTitle, Genre bookGenre,Status status) {
+        this.id = id;
         this.bookAuthor = bookAuthor;
         this.bookTitle = bookTitle;
         this.bookGenre = bookGenre;
+        this.status = status;
     }
 
-    public UUID getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -40,11 +43,28 @@ public class Book {
         this.bookTitle = bookTitle;
     }
 
-    public String getBookGenre() {
+    public Genre getBookGenre() {
         return bookGenre;
     }
 
-    public void setBookGenre(String bookGenre) {
+    public void setBookGenre(Genre bookGenre) {
         this.bookGenre = bookGenre;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "Book ID: " + id +
+                "\n Author: " + bookAuthor +
+                "\n Title: " + bookTitle +
+                "\n Genre: " + bookGenre +
+                "\n Status: " + status;
     }
 }

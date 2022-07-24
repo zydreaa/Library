@@ -18,10 +18,10 @@ public class LibraryRepository {
                 " VALUES(?, ?, ?, ?)";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
 
-        preparedStatement.setInt(1, book.getId()); //pagalvoti
+        preparedStatement.setInt(1, book.getId());
         preparedStatement.setString(2, book.getBookAuthor());
         preparedStatement.setString(3, book.getBookTitle());
-        preparedStatement.setString(4, book.getBookGenre());
+        preparedStatement.setString(4, book.getBookGenre().toString());
 
         preparedStatement.execute();
     }
@@ -31,7 +31,7 @@ public class LibraryRepository {
                 " VALUES(?, ?, ?)";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
 
-        preparedStatement.setInt(1, user.getId()); //pagalvoti
+        preparedStatement.setInt(1, user.getUserId());
         preparedStatement.setString(2, user.getUsername());
         preparedStatement.setString(3, user.getPassword());
 
