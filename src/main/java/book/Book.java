@@ -1,22 +1,40 @@
 package book;
 
-import java.util.UUID;
+import java.sql.Timestamp;
+import java.sql.Date;
 
 public class Book {
 
     private int id;
-    public String bookAuthor;
-    public String bookTitle;
-    public Genre bookGenre;
+    private String bookAuthor;
+    private String bookTitle;
+    private Genre bookGenre;
+    private Status status;
+    private Timestamp borrowedAt;
+    private Timestamp returnedAt;
 
-    public Status status;
-
-    public Book(int id, String bookAuthor, String bookTitle, Genre bookGenre,Status status) {
+    public Book() {
         this.id = id;
         this.bookAuthor = bookAuthor;
         this.bookTitle = bookTitle;
         this.bookGenre = bookGenre;
         this.status = status;
+    }
+    public Book(int id, String bookAuthor, String bookTitle, Genre bookGenre, Status status) {
+        this.id = id;
+        this.bookAuthor = bookAuthor;
+        this.bookTitle = bookTitle;
+        this.bookGenre = bookGenre;
+        this.status = status;
+    }
+    public Book(int id, String bookAuthor, String bookTitle, Genre bookGenre, Status status, Timestamp borrowedAt, Timestamp returnedAt) {
+        this.id = id;
+        this.bookAuthor = bookAuthor;
+        this.bookTitle = bookTitle;
+        this.bookGenre = bookGenre;
+        this.status = status;
+        this. borrowedAt = borrowedAt;
+        this.returnedAt = returnedAt;
     }
 
     public int getId() {
@@ -59,12 +77,32 @@ public class Book {
         this.status = status;
     }
 
+    public Timestamp getBorrowedAt(Object o) {
+        return borrowedAt;
+    }
+
+    public void setBorrowedAt(Timestamp borrowedAt) {
+        this.borrowedAt = borrowedAt;
+    }
+
+    public Timestamp getReturnedAt() {
+        return returnedAt;
+    }
+
+    public void setReturnedAt(Timestamp returnedAt) {
+        this.returnedAt = returnedAt;
+    }
+
     @Override
     public String toString() {
         return "Book ID: " + id +
-                "\n Author: " + bookAuthor +
-                "\n Title: " + bookTitle +
-                "\n Genre: " + bookGenre +
-                "\n Status: " + status;
+                " | Author: " + bookAuthor +
+                " | Title: " + bookTitle +
+                " | Genre: " + bookGenre +
+                " | Status: " + status +
+                " | Borrowed at: " + borrowedAt +
+//                "\n Must return at:  " + untilDate +
+                " | Returned at: " + returnedAt;
+
     }
 }

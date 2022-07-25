@@ -6,11 +6,11 @@ CREATE TABLE IF NOT EXISTS books (
     id int not null auto_increment,
     bookAuthor text not null,
     bookTitle text not null,
-    bookGenre text not null,
+    bookGenre varchar(10),
     status varchar(10),
-    /*audit fields*/
-    createdAt timestamp default current_timestamp,
-    updatedAt timestamp default current_timestamp on update current_timestamp,
+    borrowedAt timestamp default current_timestamp,
+    untilDate date,
+    returnedAt timestamp default current_timestamp on update current_timestamp,
     primary key (id)
     );
    
