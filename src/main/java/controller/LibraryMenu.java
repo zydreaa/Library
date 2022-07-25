@@ -50,7 +50,7 @@ public class LibraryMenu {
                     libraryController.viewAllBooks(); //VEIKIA
                     break;
                 case "7":
-                    libraryController.viewBooksByGenre();
+                    libraryController.viewBooksByGenre(); //NEVEIKIA
                     break;
                 case "8":
                     break;
