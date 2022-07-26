@@ -9,11 +9,14 @@ import user.User;
 import javax.swing.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.stream.Stream;
 
-public class LibraryController {
+import static book.Status.AVAILABLE;
 
-    LibraryRepository libraryRepository = new LibraryRepository();
+public class LibraryController {
+    Scanner scanner = new Scanner(System.in);
+    static LibraryRepository libraryRepository = new LibraryRepository();
 
     public ArrayList<User> users = new ArrayList<>();
     public ArrayList<Book> books = new ArrayList<>();
@@ -21,7 +24,7 @@ public class LibraryController {
     public LibraryController(){
     }
 
-    public void addBook() { //VEIKIA
+    public void addBook() {
         try {
             Book book = this.collectBookInfo();
             libraryRepository.addBookToDB(book);
@@ -48,12 +51,12 @@ public class LibraryController {
                 genreOptions,
                 genreOptions[0]
         ).toString()));
-        book.setStatus(Status.AVAILABLE);
+        book.setStatus(AVAILABLE);
 
         return book;
     }
 
-    public void addUser() { //VEIKIA
+    public void addUser() {
         try {
             int userId = users.size();
             String username = JOptionPane.showInputDialog("Please enter username: ");
@@ -79,7 +82,7 @@ public class LibraryController {
         }
     }
 
-    public void viewAllBooks() { //VEIKIA
+    public void viewAllBooks() {
         try {
             ArrayList<Book> books = libraryRepository.getAllBooksFromDB();
             System.out.println("_______________________________________________________________________________________________________________________________");
@@ -101,21 +104,67 @@ public class LibraryController {
             String selectedGenre = String.valueOf(Genre.valueOf(JOptionPane.showInputDialog(
                     null,
                     "Choose genre of the book:",
-                    "Genre of the book:",
+                    "Genres of the books:",
                     JOptionPane.QUESTION_MESSAGE,
                     null,
                     genreOptions,
                     genreOptions[0]
             ).toString()));
 
-            Book books = libraryRepository.getBookByGenreFromDb(selectedGenre);
-            System.out.println(books);
+            ArrayList<Book> books = libraryRepository.getBookByGenreFromDb(selectedGenre);
+            System.out.println("_______________________________________________________________________________________________________________________________");
+            System.out.println("                                    === ALL BOOKS BY GENRE " + selectedGenre.toUpperCase() + " === ");
+            System.out.println("_______________________________________________________________________________________________________________________________");
+            books.forEach(System.out::println);
+            System.out.println("_______________________________________________________________________________________________________________________________");
         }catch (Exception e){
             System.out.println("Error");
             e.printStackTrace();
         }
-
     }
 
+    public  void viewBooksByAuthor(){
+        try {
+            String selectedAuthor = JOptionPane.showInputDialog("Enter the author of the book you are searching: ");
+
+            ArrayList<Book> books = libraryRepository.getBookByAuthorFromDb(selectedAuthor);
+            System.out.println("_______________________________________________________________________________________________________________________________");
+            System.out.println("                                    === ALL AUTHOR " + selectedAuthor.toUpperCase() + " BOOKS IN THE LIBRARY === ");
+            System.out.println("_______________________________________________________________________________________________________________________________");
+            books.forEach(System.out::println);
+            System.out.println("_______________________________________________________________________________________________________________________________");
+        }catch (Exception e){
+            System.out.println("Error");
+            e.printStackTrace();
+        }
+    }
+
+    public static void viewBooksByStatus(){
+        try {
+            ArrayList<Book> books = libraryRepository.getBookByStatusFromDb();
+            System.out.println("_______________________________________________________________________________________________________________________________");
+            System.out.println("                                    === ALL AVAILABLE BOOKS IN THE LIBRARY === ");
+            System.out.println("_______________________________________________________________________________________________________________________________");
+            books.forEach(System.out::println);
+            System.out.println("_______________________________________________________________________________________________________________________________");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void viewAllUsers() {
+        try {
+            ArrayList<User> users = libraryRepository.getAllUsersFromDB();
+            System.out.println("_______________________________________________________________________________________________________________________________");
+            System.out.println("                                    === LIBRARY USER LIST === ");
+            System.out.println("_______________________________________________________________________________________________________________________________");
+            books.forEach(System.out::println);
+            System.out.println("_______________________________________________________________________________________________________________________________");
+        } catch (SQLException exception) {
+            System.out.println("Error");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
 

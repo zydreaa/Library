@@ -28,7 +28,7 @@ public class LibraryMenu {
                             "8. View book by author\n" +
                             "9. View all available books\n" +
                             "10. Show all user\n" +
-                            "11. Show borrowed book by User ID\n" + //su useriu, grazinimo data, pasiemimo data
+                            "11. Show borrowed books by User ID\n" + //su useriu, grazinimo data, pasiemimo data
                             "0. QUIT"
             );
 
@@ -50,13 +50,16 @@ public class LibraryMenu {
                     libraryController.viewAllBooks(); //VEIKIA
                     break;
                 case "7":
-                    libraryController.viewBooksByGenre(); //NEVEIKIA
+                    libraryController.viewBooksByGenre(); //VEIKIA
                     break;
                 case "8":
+                    libraryController.viewBooksByAuthor(); //VEIKIA
                     break;
                 case "9":
+                    LibraryController.viewBooksByStatus(); //VEIKIA
                     break;
                 case "10":
+                    libraryController.viewAllUsers();// Nerodo useriu
                     break;
                 case "11":
                     break;

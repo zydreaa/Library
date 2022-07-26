@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+
 public class LibraryRepository {
 
     Connection connection = new DbConnection().getConnection();
@@ -54,7 +55,7 @@ public class LibraryRepository {
     }
 
     public ArrayList<Book> getAllBooksFromDB() throws Exception {
-        java.util.ArrayList<Book> books = new ArrayList<>();
+        ArrayList<Book> books = new ArrayList<>();
         String query = "SELECT * FROM books";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
 
@@ -74,27 +75,89 @@ public class LibraryRepository {
         return books;
     }
 
-    public Book getBookByGenreFromDb(String selectedGenre) throws Exception {
-        Book books =  null;
-        String query = "SELECT * FROM books WHERE bookGenre = " + selectedGenre;
-        PreparedStatement preparedStatement = connection.prepareStatement(query);
-        ResultSet resultSet = preparedStatement.executeQuery();
+    public ArrayList<Book> getBookByGenreFromDb(String selectedGenre) {
+        try {
+            ArrayList<Book> books = new ArrayList<>();
+            String query = "SELECT * FROM books WHERE bookGenre = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, selectedGenre);
+            ResultSet resultSet = preparedStatement.executeQuery();
 
-        if (resultSet.next()) {
-            books = this.createBook(resultSet);
-        }else {
-            throw  new Exception("Book not found");
+            while (resultSet.next()) {
+                books.add(this.createBook(resultSet));
+            }
+            return books;
+        } catch (Exception e) {
+            System.out.println("Book not found");
+            e.printStackTrace();
+            return null;
         }
-        return books;
     }
 
-    private Book createBook(ResultSet resultSet) throws Exception {
+    public ArrayList<Book> getBookByAuthorFromDb(String selectedAuthor) {
+        try {
+            ArrayList<Book> books = new ArrayList<>();
+            String query = "SELECT * FROM books WHERE bookAuthor = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, selectedAuthor);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                books.add(this.createBook(resultSet));
+            }
+            return books;
+        } catch (Exception e) {
+            System.out.println("Book not found");
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    private Book createBook (ResultSet resultSet) throws Exception {
         return new Book(
-                resultSet.getInt("id"),
-                resultSet.getString("bookAuthor"),
-                resultSet.getString("bookTitle"),
-                Genre.valueOf(resultSet.getString("bookGenre")),
-                Status.valueOf(resultSet.getString("status"))
+              resultSet.getInt("id"),
+              resultSet.getString("bookAuthor"),
+              resultSet.getString("bookTitle"),
+              Genre.valueOf(resultSet.getString("bookGenre")),
+              Status.valueOf(resultSet.getString("status"))
+        );
+    }
+
+    public ArrayList<Book> getBookByStatusFromDb() {
+        try {
+            ArrayList<Book> books = new ArrayList<>();
+            String query = "SELECT * FROM books WHERE status LIKE 'AVAILABLE'";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                books.add(this.createBook(resultSet));
+            }
+            return books;
+        } catch (Exception e) {
+            System.out.println("Book not found");
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public ArrayList<User> getAllUsersFromDB() throws Exception {
+        ArrayList<User> users = new ArrayList<>();
+        String query = "SELECT * FROM users";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        ResultSet result = preparedStatement.executeQuery();
+
+        while (result.next()) {
+            users.add(this.createUser(result));
+        }
+        return users;
+    }
+
+    private User createUser (ResultSet result) throws Exception {
+        return new User(
+                result.getInt("id"),
+                result.getString("username"),
+                result.getString("password")
         );
     }
 }
