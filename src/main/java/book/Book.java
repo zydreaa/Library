@@ -11,6 +11,8 @@ public class Book {
     private Genre bookGenre;
     private Status status;
     private Timestamp borrowedAt;
+
+    private Date returnUntil;
     private Timestamp returnedAt;
 
     public Book() {
@@ -27,13 +29,14 @@ public class Book {
         this.bookGenre = bookGenre;
         this.status = status;
     }
-    public Book(int id, String bookAuthor, String bookTitle, Genre bookGenre, Status status, Timestamp borrowedAt, Timestamp returnedAt) {
+    public Book(int id, String bookAuthor, String bookTitle, Genre bookGenre, Status status, Timestamp borrowedAt, Date returnUntil, Timestamp returnedAt) {
         this.id = id;
         this.bookAuthor = bookAuthor;
         this.bookTitle = bookTitle;
         this.bookGenre = bookGenre;
         this.status = status;
         this. borrowedAt = borrowedAt;
+        this.returnedAt =returnedAt;
         this.returnedAt = returnedAt;
     }
 
@@ -77,32 +80,13 @@ public class Book {
         this.status = status;
     }
 
-    public Timestamp getBorrowedAt(Object o) {
-        return borrowedAt;
-    }
-
-    public void setBorrowedAt(Timestamp borrowedAt) {
-        this.borrowedAt = borrowedAt;
-    }
-
-    public Timestamp getReturnedAt() {
-        return returnedAt;
-    }
-
-    public void setReturnedAt(Timestamp returnedAt) {
-        this.returnedAt = returnedAt;
-    }
-
     @Override
     public String toString() {
         return "Book ID: " + id +
                 " | Author: " + bookAuthor +
                 " | Title: " + bookTitle +
                 " | Genre: " + bookGenre +
-                " | Status: " + status +
-                " | Borrowed at: " + borrowedAt +
-//                "\n Must return at:  " + untilDate +
-                " | Returned at: " + returnedAt;
+                " | Status: " + status;
 
     }
 }

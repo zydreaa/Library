@@ -7,6 +7,8 @@ import repository.LibraryRepository;
 import user.User;
 
 import javax.swing.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -82,6 +84,34 @@ public class LibraryController {
         }
     }
 
+    public void borrowBook() {
+        try {
+            int selectedBookId = Integer.parseInt(JOptionPane.showInputDialog("Please enter ID of the book you want to borrow: "));
+            int userId = Integer.parseInt(JOptionPane.showInputDialog("Please enter your user ID: "));
+            libraryRepository.borrowBookFromDB(selectedBookId, userId);
+            System.out.println("User " + libraryRepository.getUserById(userId).getUsername()
+                    + "have borrowed book from library");
+        }catch (Exception exception){
+            System.out.println("Error");
+            exception.printStackTrace();
+        }
+    }
+
+//    public void returnBook() {
+//        try {
+//            int selectedBookId = Integer.parseInt(JOptionPane.showInputDialog("Please enter ID of the book you want to return: "));
+//            int userId = Integer.parseInt(JOptionPane.showInputDialog("Please enter your user ID: "));
+//            libraryRepository.returnBookToDB(selectedBookId);
+//            System.out.println("User " + libraryRepository.getUserById(userId).getUsername()
+//                    + "have returned book " + libraryRepository.getBookById(selectedBookId).getBookTitle() + "to library");
+//        }catch (Exception exception){
+//            System.out.println("Error");
+//            exception.printStackTrace();
+//        }
+//    }
+
+
+
     public void viewAllBooks() {
         try {
             ArrayList<Book> books = libraryRepository.getAllBooksFromDB();
@@ -90,10 +120,9 @@ public class LibraryController {
             System.out.println("_______________________________________________________________________________________________________________________________");
             books.forEach(System.out::println);
             System.out.println("_______________________________________________________________________________________________________________________________");
-        } catch (SQLException exception) {
+        } catch (Exception exception) {
             System.out.println("Error");
-        } catch (Exception e) {
-            e.printStackTrace();
+            exception.printStackTrace();
         }
     }
 
@@ -148,6 +177,7 @@ public class LibraryController {
             books.forEach(System.out::println);
             System.out.println("_______________________________________________________________________________________________________________________________");
         } catch (Exception e) {
+            System.out.println("Error");
             e.printStackTrace();
         }
     }
@@ -158,12 +188,11 @@ public class LibraryController {
             System.out.println("_______________________________________________________________________________________________________________________________");
             System.out.println("                                    === LIBRARY USER LIST === ");
             System.out.println("_______________________________________________________________________________________________________________________________");
-            books.forEach(System.out::println);
+            users.forEach(System.out::println);
             System.out.println("_______________________________________________________________________________________________________________________________");
-        } catch (SQLException exception) {
+        } catch (Exception exception) {
             System.out.println("Error");
-        } catch (Exception e) {
-            e.printStackTrace();
+            exception.printStackTrace();
         }
     }
 }

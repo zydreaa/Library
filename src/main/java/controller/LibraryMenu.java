@@ -43,8 +43,10 @@ public class LibraryMenu {
                     libraryController.removeBook(); //VEIKIA
                     break;
                 case "4":
+                    libraryController.borrowBook();
                     break;
                 case "5":
+                    //libraryController.returnBook();
                     break;
                 case "6":
                     libraryController.viewAllBooks(); //VEIKIA
@@ -59,7 +61,7 @@ public class LibraryMenu {
                     LibraryController.viewBooksByStatus(); //VEIKIA
                     break;
                 case "10":
-                    libraryController.viewAllUsers();// Nerodo useriu
+                    libraryController.viewAllUsers();// VEIKIA
                     break;
                 case "11":
                     break;
