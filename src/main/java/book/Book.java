@@ -10,10 +10,8 @@ public class Book {
     private String bookTitle;
     private Genre bookGenre;
     private Status status;
-    private Timestamp borrowedAt;
-
-    private Date returnUntil;
-    private Timestamp returnedAt;
+    private String borrowedAt;
+    private String returnDue;
 
     public Book() {
         this.id = id;
@@ -29,15 +27,12 @@ public class Book {
         this.bookGenre = bookGenre;
         this.status = status;
     }
-    public Book(int id, String bookAuthor, String bookTitle, Genre bookGenre, Status status, Timestamp borrowedAt, Date returnUntil, Timestamp returnedAt) {
+    public Book(int id, String bookTitle, String bookAuthor, String borrowedAt, String returnDue) {
         this.id = id;
-        this.bookAuthor = bookAuthor;
         this.bookTitle = bookTitle;
-        this.bookGenre = bookGenre;
-        this.status = status;
+        this.bookAuthor = bookAuthor;
         this. borrowedAt = borrowedAt;
-        this.returnedAt =returnedAt;
-        this.returnedAt = returnedAt;
+        this.returnDue = returnDue;
     }
 
     public int getId() {
@@ -82,6 +77,15 @@ public class Book {
 
     @Override
     public String toString() {
+        if(borrowedAt!=null){
+            return "Book ID:" + id +
+                    "| Title: " + bookTitle +
+                    "| Author: " +bookAuthor +
+                    "| Borrowed at: " + borrowedAt +
+                    "| Return due: " + returnDue;
+        }
+        else
+
         return "Book ID: " + id +
                 " | Author: " + bookAuthor +
                 " | Title: " + bookTitle +

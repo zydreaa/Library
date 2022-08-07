@@ -8,9 +8,6 @@ CREATE TABLE IF NOT EXISTS books (
     bookTitle text not null,
     bookGenre varchar(10),
     status varchar(10),
-    borrowedAt timestamp default current_timestamp,
-    untilDate date,
-    returnedAt timestamp default current_timestamp on update current_timestamp,
     primary key (id)
     );
    
@@ -20,3 +17,18 @@ CREATE TABLE IF NOT EXISTS users (
     password text not null,
     primary key (id)
     );
+
+CREATE TABLE IF NOT EXISTS borrowedBookList (
+    id int not null auto_increment,
+    userId int not null ,
+    username text not null,
+    bookId int not null,
+    bookTitle text not null,
+    bookAuthor text not null,
+    borrowedAt timestamp default current_timestamp,
+    returnDue timestamp default (timestampadd(month,1,current_timestamp())),
+    primary key(id),
+    FOREIGN KEY(bookId) REFERENCES books(id)
+     );
+
+

@@ -28,42 +28,43 @@ public class LibraryMenu {
                             "8. View book by author\n" +
                             "9. View all available books\n" +
                             "10. Show all user\n" +
-                            "11. Show borrowed books by User ID\n" + //su useriu, grazinimo data, pasiemimo data
+                            "11. Show borrowed books by User ID\n" +
                             "0. QUIT"
             );
 
             switch (menu) {
                 case "1":
-                    libraryController.addBook(); //VEIKIA
+                    libraryController.addBook();
                     break;
                 case "2":
-                    libraryController.addUser(); //VEIKIA
+                    libraryController.addUser();
                     break;
                 case "3":
-                    libraryController.removeBook(); //VEIKIA
+                    libraryController.removeBook();
                     break;
                 case "4":
                     libraryController.borrowBook();
                     break;
                 case "5":
-                    //libraryController.returnBook();
+                    libraryController.returnBook();
                     break;
                 case "6":
-                    libraryController.viewAllBooks(); //VEIKIA
+                    libraryController.viewAllBooks();
                     break;
                 case "7":
-                    libraryController.viewBooksByGenre(); //VEIKIA
+                    libraryController.viewBooksByGenre();
                     break;
                 case "8":
-                    libraryController.viewBooksByAuthor(); //VEIKIA
+                    libraryController.viewBooksByAuthor();
                     break;
                 case "9":
-                    LibraryController.viewBooksByStatus(); //VEIKIA
+                    LibraryController.viewBooksByStatus();
                     break;
                 case "10":
-                    libraryController.viewAllUsers();// VEIKIA
+                    libraryController.viewAllUsers();
                     break;
                 case "11":
+                    libraryController.borrowedBookByUserId();
                     break;
                 case "0":
                     System.exit(1);

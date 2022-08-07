@@ -2,13 +2,10 @@ package controller;
 
 import book.Book;
 import book.Genre;
-import book.Status;
 import repository.LibraryRepository;
 import user.User;
 
 import javax.swing.*;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -89,28 +86,22 @@ public class LibraryController {
             int selectedBookId = Integer.parseInt(JOptionPane.showInputDialog("Please enter ID of the book you want to borrow: "));
             int userId = Integer.parseInt(JOptionPane.showInputDialog("Please enter your user ID: "));
             libraryRepository.borrowBookFromDB(selectedBookId, userId);
-            System.out.println("User " + libraryRepository.getUserById(userId).getUsername()
-                    + "have borrowed book from library");
         }catch (Exception exception){
             System.out.println("Error");
             exception.printStackTrace();
         }
     }
 
-//    public void returnBook() {
-//        try {
-//            int selectedBookId = Integer.parseInt(JOptionPane.showInputDialog("Please enter ID of the book you want to return: "));
-//            int userId = Integer.parseInt(JOptionPane.showInputDialog("Please enter your user ID: "));
-//            libraryRepository.returnBookToDB(selectedBookId);
-//            System.out.println("User " + libraryRepository.getUserById(userId).getUsername()
-//                    + "have returned book " + libraryRepository.getBookById(selectedBookId).getBookTitle() + "to library");
-//        }catch (Exception exception){
-//            System.out.println("Error");
-//            exception.printStackTrace();
-//        }
-//    }
-
-
+    public void returnBook() {
+        try {
+            int selectedBookId = Integer.parseInt(JOptionPane.showInputDialog("Please enter ID of the book you want to return: "));
+            int userId = Integer.parseInt(JOptionPane.showInputDialog("Please enter your user ID: "));
+            libraryRepository.returnBookToDB(selectedBookId, userId);
+        }catch (Exception exception){
+            System.out.println("Error");
+            exception.printStackTrace();
+        }
+    }
 
     public void viewAllBooks() {
         try {
@@ -189,6 +180,21 @@ public class LibraryController {
             System.out.println("                                    === LIBRARY USER LIST === ");
             System.out.println("_______________________________________________________________________________________________________________________________");
             users.forEach(System.out::println);
+            System.out.println("_______________________________________________________________________________________________________________________________");
+        } catch (Exception exception) {
+            System.out.println("Error");
+            exception.printStackTrace();
+        }
+    }
+
+    public void borrowedBookByUserId(){
+        try {
+            int userId = Integer.parseInt(JOptionPane.showInputDialog("Please enter your user ID: "));
+            ArrayList<Book> borrowedBooks = libraryRepository.borrowedBooksByUserId(userId);
+            System.out.println("_______________________________________________________________________________________________________________________________");
+            System.out.println("                                    === YOUR BORROWED BOOK LIST === ");
+            System.out.println("_______________________________________________________________________________________________________________________________");
+            borrowedBooks.forEach(System.out::println);
             System.out.println("_______________________________________________________________________________________________________________________________");
         } catch (Exception exception) {
             System.out.println("Error");
