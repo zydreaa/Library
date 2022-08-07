@@ -1,8 +1,5 @@
 package book;
 
-import java.sql.Timestamp;
-import java.sql.Date;
-
 public class Book {
 
     private int id;
@@ -77,20 +74,19 @@ public class Book {
 
     @Override
     public String toString() {
-        if(borrowedAt!=null){
+        if (borrowedAt != null) {
             return "Book ID:" + id +
                     "| Title: " + bookTitle +
-                    "| Author: " +bookAuthor +
+                    "| Author: " + bookAuthor +
                     "| Borrowed at: " + borrowedAt +
                     "| Return due: " + returnDue;
+        } else {
+            return "Book ID: " + id +
+                    " | Author: " + bookAuthor +
+                    " | Title: " + bookTitle +
+                    " | Genre: " + bookGenre +
+                    " | Status: " + status;
+
         }
-        else
-
-        return "Book ID: " + id +
-                " | Author: " + bookAuthor +
-                " | Title: " + bookTitle +
-                " | Genre: " + bookGenre +
-                " | Status: " + status;
-
     }
 }

@@ -8,13 +8,11 @@ import user.User;
 import javax.swing.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.stream.Stream;
 
 import static book.Status.AVAILABLE;
 
 public class LibraryController {
-    Scanner scanner = new Scanner(System.in);
     static LibraryRepository libraryRepository = new LibraryRepository();
 
     public ArrayList<User> users = new ArrayList<>();
