@@ -1,6 +1,6 @@
 **LIBRARY MANAGEMENT SYSTEM**
 
-Library Management System is created that user would be able to use below provided [menu options:]()
+Library Management System is created that user would be able to use below provided menu options:
 * Add new book
 * Add new user
 * Remove book
@@ -13,7 +13,7 @@ Library Management System is created that user would be able to use below provid
 * Show all user
 * Show borrowed books by User ID
 
-[All the data is stored in SQL database. And in order to run this project you need to:]()
+All the data is stored in SQL database. And in order to run this project you need to:
 1. Execute code from dataBase.sql in your MySQL Workbench
 2. Fill your information in resources/database.properties: 
  * database.username= 
@@ -22,7 +22,7 @@ Library Management System is created that user would be able to use below provid
  * database.port= 
  * database.dbName=
 
-[Things to improve:]()
+Things to improve:
 * Implement login/log out methods
 * Split users into 2 types(admin and users)
 * Separate admin and user menu
