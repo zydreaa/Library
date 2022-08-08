@@ -58,7 +58,7 @@ public class LibraryMenu {
                     libraryController.viewBooksByAuthor();
                     break;
                 case "9":
-                    LibraryController.viewBooksByStatus();
+                    libraryController.viewBooksByStatus();
                     break;
                 case "10":
                     libraryController.viewAllUsers();

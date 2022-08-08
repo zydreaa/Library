@@ -13,7 +13,8 @@ import java.util.stream.Stream;
 import static book.Status.AVAILABLE;
 
 public class LibraryController {
-    static LibraryRepository libraryRepository = new LibraryRepository();
+
+    LibraryRepository libraryRepository = new LibraryRepository();
 
     public ArrayList<User> users = new ArrayList<>();
     public ArrayList<Book> books = new ArrayList<>();
@@ -103,12 +104,9 @@ public class LibraryController {
 
     public void viewAllBooks() {
         try {
-            ArrayList<Book> books = libraryRepository.getAllBooksFromDB();
-            System.out.println("_______________________________________________________________________________________________________________________________");
-            System.out.println("                                    === ALL THE BOOKS IN THE LIBRARY === ");
-            System.out.println("_______________________________________________________________________________________________________________________________");
-            books.forEach(System.out::println);
-            System.out.println("_______________________________________________________________________________________________________________________________");
+            ArrayList<Book> value = libraryRepository.getAllBooksFromDB();
+            String tableTitle = "=== ALL THE BOOKS IN THE LIBRARY ===";
+            displayData(tableTitle, value);
         } catch (Exception exception) {
             System.out.println("Error");
             exception.printStackTrace();
@@ -129,12 +127,9 @@ public class LibraryController {
                     genreOptions[0]
             ).toString()));
 
-            ArrayList<Book> books = libraryRepository.getBookByGenreFromDb(selectedGenre);
-            System.out.println("_______________________________________________________________________________________________________________________________");
-            System.out.println("                                    === ALL BOOKS BY GENRE " + selectedGenre.toUpperCase() + " === ");
-            System.out.println("_______________________________________________________________________________________________________________________________");
-            books.forEach(System.out::println);
-            System.out.println("_______________________________________________________________________________________________________________________________");
+            ArrayList<Book> value = libraryRepository.getBookByGenreFromDb(selectedGenre);
+            String tableTitle = "=== ALL BOOKS BY GENRE " + selectedGenre.toUpperCase() + " ===";
+            displayData(tableTitle, value);
         }catch (Exception e){
             System.out.println("Error");
             e.printStackTrace();
@@ -145,26 +140,20 @@ public class LibraryController {
         try {
             String selectedAuthor = JOptionPane.showInputDialog("Enter the author of the book you are searching: ");
 
-            ArrayList<Book> books = libraryRepository.getBookByAuthorFromDb(selectedAuthor);
-            System.out.println("_______________________________________________________________________________________________________________________________");
-            System.out.println("                                    === ALL AUTHOR " + selectedAuthor.toUpperCase() + " BOOKS IN THE LIBRARY === ");
-            System.out.println("_______________________________________________________________________________________________________________________________");
-            books.forEach(System.out::println);
-            System.out.println("_______________________________________________________________________________________________________________________________");
+            ArrayList<Book> value = libraryRepository.getBookByAuthorFromDb(selectedAuthor);
+            String tableTitle = "=== ALL AUTHOR " + selectedAuthor.toUpperCase() + " BOOKS IN THE LIBRARY ===";
+            displayData(tableTitle, value);
         }catch (Exception e){
             System.out.println("Error");
             e.printStackTrace();
         }
     }
 
-    public static void viewBooksByStatus(){
+    public void viewBooksByStatus(){
         try {
-            ArrayList<Book> books = libraryRepository.getBookByStatusFromDb();
-            System.out.println("_______________________________________________________________________________________________________________________________");
-            System.out.println("                                    === ALL AVAILABLE BOOKS IN THE LIBRARY === ");
-            System.out.println("_______________________________________________________________________________________________________________________________");
-            books.forEach(System.out::println);
-            System.out.println("_______________________________________________________________________________________________________________________________");
+            ArrayList<Book> value = libraryRepository.getBookByStatusFromDb();
+            String tableTitle = "=== LIBRARY USER LIST ===";
+            displayData(tableTitle, value);
         } catch (Exception e) {
             System.out.println("Error");
             e.printStackTrace();
@@ -173,12 +162,9 @@ public class LibraryController {
 
     public void viewAllUsers() {
         try {
-            ArrayList<User> users = libraryRepository.getAllUsersFromDB();
-            System.out.println("_______________________________________________________________________________________________________________________________");
-            System.out.println("                                    === LIBRARY USER LIST === ");
-            System.out.println("_______________________________________________________________________________________________________________________________");
-            users.forEach(System.out::println);
-            System.out.println("_______________________________________________________________________________________________________________________________");
+            ArrayList<User> value = libraryRepository.getAllUsersFromDB();
+            String tableTitle = "=== LIBRARY USER LIST ===";
+            displayData(tableTitle, value);
         } catch (Exception exception) {
             System.out.println("Error");
             exception.printStackTrace();
@@ -188,16 +174,22 @@ public class LibraryController {
     public void borrowedBookByUserId(){
         try {
             int userId = Integer.parseInt(JOptionPane.showInputDialog("Please enter your user ID: "));
-            ArrayList<Book> borrowedBooks = libraryRepository.borrowedBooksByUserId(userId);
-            System.out.println("_______________________________________________________________________________________________________________________________");
-            System.out.println("                                    === YOUR BORROWED BOOK LIST === ");
-            System.out.println("_______________________________________________________________________________________________________________________________");
-            borrowedBooks.forEach(System.out::println);
-            System.out.println("_______________________________________________________________________________________________________________________________");
+            ArrayList<Book> value = libraryRepository.borrowedBooksByUserId(userId);
+            String tableTitle = "=== YOUR BORROWED BOOK LIST ===";
+            displayData(tableTitle, value);
         } catch (Exception exception) {
             System.out.println("Error");
             exception.printStackTrace();
         }
+    }
+
+    public void displayData(String tableTitle, ArrayList<?> value){
+        System.out.println("_________________________________________________________________________________________");
+        System.out.println(tableTitle);
+        System.out.println("_________________________________________________________________________________________");
+        value.forEach(System.out::println);
+        System.out.println("_________________________________________________________________________________________");
+
     }
 }
 

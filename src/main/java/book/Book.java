@@ -75,13 +75,13 @@ public class Book {
     @Override
     public String toString() {
         if (borrowedAt != null) {
-            return "Book ID:" + id +
+            return "ID:" + id +
                     "| Title: " + bookTitle +
                     "| Author: " + bookAuthor +
                     "| Borrowed at: " + borrowedAt +
                     "| Return due: " + returnDue;
         } else {
-            return "Book ID: " + id +
+            return "ID: " + id +
                     " | Author: " + bookAuthor +
                     " | Title: " + bookTitle +
                     " | Genre: " + bookGenre +
